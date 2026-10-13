@@ -10,7 +10,7 @@ def teacher_screen():
     style_base_layout()
     
     
-    teacher_screen_login()    
+    # teacher_screen_login()    
     
     if 'teacher_login_type' not in st.session_state or st.session_state.teacher_login_type == 'login':
         teacher_screen_login()
@@ -25,7 +25,7 @@ def teacher_screen_login():
         
     with c2:
         if st.button("go to home",icon="🏠" , shortcut="Ctrl+backspace"  ):
-            st.session_state['login_type'] = 'home'
+            st.session_state['login_type'] = 'home_screen'
             st.rerun()
         
     st.header("login using password", text_alignment="center")
@@ -56,7 +56,7 @@ def teacher_screen_register():
         
     with c2:
         if st.button("go to home",icon="🏠" , shortcut="Ctrl+backspace"  ):
-            st.session_state['login_type'] = 'home'
+            check=st.session_state['login_type'] = 'home'
             st.rerun()
         
     st.header("Register your teacher profile", text_alignment="center")
@@ -77,4 +77,3 @@ def teacher_screen_register():
             st.rerun()
 
     footer_dashboard()
-    pass
