@@ -4,6 +4,23 @@ from src.components.footer import footer_dashboard
 from src.ui.base_layout import style_background_dashboard , style_base_layout
 
 from src.components.header import header_dashboard
+from src.database.db import check_teacher_exists, create_teacher , teacher_login 
+
+def register_teacher(teacher_username,  teacher_name, teacher_password, teacher_conform_password):
+    if not teacher_username or not teacher_name or not teacher_password or not teacher_conform_password:
+        return False, "All fields are required."
+    
+    if check_teacher_exists(teacher_username):
+        return False, "Username already exists. Please choose a different username."
+    
+    if teacher_password != teacher_conform_password:
+        return False, "Passwords do not match."
+    try:
+        create_teacher(teacher_username, teacher_password, teacher_name)
+        return True, "Teacher registered successfully."
+    except Exception as e:
+        return False, f"An error occurred during registration: {str(e)}"
+
 def teacher_screen():
     
     style_background_dashboard()
@@ -11,13 +28,32 @@ def teacher_screen():
     
     
     # teacher_screen_login()    
-    
-    if 'teacher_login_type' not in st.session_state or st.session_state.teacher_login_type == 'login':
+    if "teacher_data" in st.session_state:
+        teacher_dashboard()
+    elif 'teacher_login_type' not in st.session_state or st.session_state.teacher_login_type == 'login':
         teacher_screen_login()
     elif st.session_state.teacher_login_type == 'register':
         teacher_screen_register()
 
 
+def teacher_dashboard():
+    teacher_data=st.session_state.teacher_data
+    
+    st.header(f"Welcome, {teacher_data['name']}!", text_alignment="center")
+ 
+ 
+def login_teacher(teacher_username, teacher_password):
+    if not teacher_username or not teacher_password:
+        return False, "Both username and password are required."
+    
+    teacher = teacher_login(teacher_username, teacher_password)
+    if teacher:
+        st.session_state.user_role = 'teacher'
+        st.session_state.teacher_data = teacher
+        st.session_state.is_logged_in = True
+        return True
+    return False, "Invalid username or password."
+    
 def teacher_screen_login():
     c1,c2 = st.columns(2 , vertical_alignment="center", gap="large")
     with c1:
@@ -35,7 +71,15 @@ def teacher_screen_login():
     st.divider()
     btn1,btn2=st.columns(2)
     with btn1:
-        st.button("login" , icon="🔑" ,  shortcut="Ctrl+Enter" , width="stretch" )
+        if st.button("login" , icon="🔑" ,  shortcut="Ctrl+Enter" , width="stretch" ):
+            if login_teacher(teacher_username, teacher_password):
+                st.toast("Login successful!", icon="✅")
+                import time
+                time.sleep(2)
+                
+                st.rerun()
+            else:
+                st.error("Invalid username or password.", icon="❌")
     with btn2:
         if st.button("register", type="primary" , icon="✍️" , shortcut="Ctrl+Shift+Enter" , width="stretch" ):
             st.session_state.teacher_login_type = 'register'
@@ -70,7 +114,16 @@ def teacher_screen_register():
     st.divider()
     btn1,btn2=st.columns(2)
     with btn1:
-        st.button("register now" , icon="🔑" , shortcut="Ctrl+Enter" , width="stretch" )
+        if st.button("register now" , icon="🔑" , shortcut="Ctrl+Enter" , width="stretch" ):
+            success, message = register_teacher(teacher_username,  teacher_name, teacher_password, teacher_conform_password)
+            if success:
+                st.success(message)
+                import time
+                time.sleep(2)
+                st.session_state.teacher_login_type = 'login'
+                st.rerun()
+            else:
+                st.error(message)
     with btn2:
         if st.button("login instead", type="primary" , icon="✍️" , shortcut="Ctrl+Shift+Enter" , width="stretch" ):
             st.session_state.teacher_login_type = 'login'
