@@ -61,7 +61,7 @@ def teacher_screen_login():
         
     with c2:
         if st.button("go to home",icon="🏠" , shortcut="Ctrl+backspace"  ):
-            st.session_state['login_type'] = 'home_screen'
+            st.session_state['login_type'] = None
             st.rerun()
         
     st.header("login using password", text_alignment="center")

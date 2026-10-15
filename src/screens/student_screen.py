@@ -18,14 +18,14 @@ def student_screen():
         
     with c2:
         if st.button("go to home",icon="🏠" , shortcut="Ctrl+backspace"  ):
-            st.session_state['login_type'] = 'home_screen'
+            st.session_state['login_type'] = None
             st.rerun()
         
     st.header("login using face recognition", text_alignment="center")
     st.space()
     st.space()
 
-    photo_source=st.camera_input("Take a picture of your face for login", label_visibility="collapsed" , key="student_login_camera_input" , on_change=student_login)
+    photo_source=st.camera_input("Take a picture of your face for login", label_visibility="collapsed" , key="student_login_camera_input" )
     if photo_source:
         np.array(Image.open(photo_source))
 
