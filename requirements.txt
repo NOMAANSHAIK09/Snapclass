@@ -18,3 +18,7 @@ segno # use for QR code generation
 pillow # use for image processing
 
 streamlit
+
+librosa
+
+resemblyzer
