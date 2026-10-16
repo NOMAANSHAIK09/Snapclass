@@ -29,3 +29,9 @@ def teacher_login(username, password):
 def get_all_students():
     response = supabase.table("studdents").select("*").execute()
     return response
+
+def create_student(new_name, face_embedding=None, voice_embedding=None):
+    data={'name':new_name, 'face_embedding':face_embedding , 'voice_embedding':voice_embedding}
+    response=supabase.table("student").insert(data).execute()
+    return response
+    
