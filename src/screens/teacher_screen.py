@@ -6,6 +6,8 @@ from src.components.subject_card import subject_card
 from src.components.header import header_dashboard
 from src.database.db import check_teacher_exists, create_teacher , teacher_login , get_all_students , get_teacher_subjects
 from src.components.dialog_create_subject import create_subject_dialog
+from src.components.dialog_share_subject import share_subject_dialog
+
 def register_teacher(teacher_username,  teacher_name, teacher_password, teacher_conform_password):
     if not teacher_username or not teacher_name or not teacher_password or not teacher_conform_password:
         return False, "All fields are required."
@@ -120,7 +122,7 @@ def teacher_tab_manage_subject():
         subject_card(
             name=sub['name'],
             code=sub['subject_code'],
-            stats=stats
+            stats=stats,
             footer_callback=share_btn
         )
     else:
