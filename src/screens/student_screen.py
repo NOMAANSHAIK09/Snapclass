@@ -111,7 +111,7 @@ def student_screen():
     st.space()
     st.space()
     show_registration= False
-    photo_source=st.camera_input("Take a picture of your face for login", label_visibility="collapsed" , key="student_login_camera_input" )
+    photo_source=st.camera_input("Take a picture of your face for login", key="student_login_camera_input" )
     if photo_source:
         img=np.array(Image.open(photo_source))
         
@@ -165,7 +165,7 @@ def student_screen():
                             
                             voice_emb = None
                             if audio_data:
-                                voice_emp=get_voice_embedding(audio_data.read())
+                                voice_emb=get_voice_embedding(audio_data.read())
                                 
                             response_data= create_student(new_name, face_embedding=face_emb, voice_embedding=voice_emb)
                             
