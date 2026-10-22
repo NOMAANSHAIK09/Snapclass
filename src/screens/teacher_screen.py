@@ -58,7 +58,7 @@ def teacher_dashboard():
     with c2:
         st.subheader(f"Welcome, {teacher_data['name']}!", text_alignment="center")
 
-        if st.button("logout ",icon="🏠" , shortcut="Ctrl+backspace"  ):
+        if st.button("logout ", type='secondary',icon="🏠" , shortcut="Ctrl+backspace"  ):
             st.session_state['is_login_in'] = False
             del st.session_state.teacher_data
             st.rerun()
@@ -94,7 +94,7 @@ def teacher_dashboard():
     
     if st.session_state.current_teacher_tab=="take_attendance":
         teacher_tab_take_attendance()
-    if st.session_state.current_teacher_tab=="manage_subject":
+    if st.session_state.current_teacher_tab=="manage_subjects":
         teacher_tab_manage_subject()
     if st.session_state.current_teacher_tab=="attendance_records":
         teacher_tab_attendance_records()
@@ -157,29 +157,30 @@ def teacher_tab_manage_subject():
     teacher_id=st.session_state.teacher_data['teacher_id']
     col1,col2 = st.columns(2)
     with col1:
-        st.header("Manage_subjects",width='streach')
+        st.header("Manage_subjects",width='stretch')
     with col2:
-        if st.button('Create New Subject', width='streach'):
+        if st.button('Create New Subject', width='stretch'):
             create_subject_dialog(teacher_id)
         
     subjects = get_teacher_subjects(teacher_id)
     if subjects:
         for sub in subjects:
             stats=[
-                ("", "students", sub['total_students']),
-                ("", "classes", sub['total_classes']),
+                ("🫂", "Students", sub['total_students']),
+                ("🕰️", "Classes", sub['total_classes']),
                 
             ]
         def share_btn():
-            if st.button(f"share code {sub['name']}", key=f"share_{sub['subject_code']}", icon="::material/share"):
+            if st.button(f"share code {sub['name']}", key=f"share_{sub['subject_code']}", icon=":material/share:"):
                 share_subject_dialog(sub['name'], sub['subject_code'])
             st.space()
             
         subject_card(
             name=sub['name'],
             code=sub['subject_code'],
+            section = sub['section'],
             stats=stats,
-            footer_callback=share_btn
+            footer_callback=share_btn()
         )
     else:
         st.info("NO SUBJECTS FOUND. CREATE ONE ABOVE")

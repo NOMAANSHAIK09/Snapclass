@@ -5,7 +5,7 @@ import io
 
 @st.dialog("Share class link")
 def share_subject_dialog(subject_name, subject_code):
-    app_domain="http://localhost:8501"
+    app_domain="SnapClass-main"
     join_url = f"{app_domain}/?join-code={subject_code}"
     
     st.header("Scan to join")
@@ -16,7 +16,7 @@ def share_subject_dialog(subject_name, subject_code):
     
     qr.save(out, kind='png', scale=10, border=1)
     
-    col1, col2 = st.columns()
+    col1, col2 = st.columns(2)
     with col1:
          st.markdown('### Copy Link')
          st.code(join_url, language="text")

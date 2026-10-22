@@ -48,7 +48,7 @@ def style_base_layout():
                     font-size: 3.5rem !important;
                     line-height: 0.9 !important;
                     margin-bottom: 0rem !important;
-                    color: #E0E3FF !important;
+                    
                 }
                 
                 h2{
@@ -56,7 +56,7 @@ def style_base_layout():
                                     font-size: 2rem !important;
                                     line-height: 0.9 !important;
                                     margin-bottom: 0rem !important;
-                                    color: black !important;
+                                    
                                 }
                                 
                 h3,h4,p{
@@ -64,11 +64,10 @@ def style_base_layout():
                     font-size: 1.25rem !important;
                     line-height: 1.5 !important;
                     margin-bottom: 1rem !important;
-                    color: black !important;
                 }
-                button[kind="primary"]{
+                button{
                     border-radius: 1.5rem !important;
-                    background: #5865F2 !important;
+                    background-color: #5865F2 !important;
                     color: white !important;
                     padding: 10px 20px !important;
                     border: none !important;
@@ -77,7 +76,7 @@ def style_base_layout():
                 
                 button[kind="secondary"]{
                     border-radius: 1.5rem !important;
-                    background: #EB459E !important;
+                    background-color: #EB459E !important;
                     color: white !important;
                     padding: 10px 20px !important;
                     border: none !important;
@@ -85,7 +84,7 @@ def style_base_layout():
                 }
                 button[kind="tertiary"]{
                     border-radius: 1.5rem !important;
-                    background: black !important;
+                    background-color: black !important;
                     color: white !important;
                     padding: 10px 20px !important;
                     border: none !important;

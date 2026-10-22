@@ -36,8 +36,8 @@ def create_student(new_name, face_embedding=None, voice_embedding=None):
     return response
 
 def create_subject(subject_code, name, section, teacher_id):
-    data = {"suject_code":subject_code, "name":name,"section":section, "teacher_id":teacher_id}
-    response=supabase.table("subjeccts").insert(data).execute()
+    data = {"subject_code":subject_code, "name":name,"section":section, "teacher_id":teacher_id}
+    response=supabase.table("subjects").insert(data).execute()
     return response.data
 
 
