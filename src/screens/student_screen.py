@@ -103,11 +103,11 @@ def student_screen():
         header_dashboard()
         
     with c2:
-        if st.button("go to home",icon="🏠" , shortcut="Ctrl+backspace"  ):
+        if st.button("go to home",icon="🏠" , type='secondary', key='loginbackbtn', shortcut="Ctrl+backspace"  ):
             st.session_state['login_type'] = None
             st.rerun()
         
-    st.header("login using face recognition", text_alignment="center")
+    st.header("login using face id", text_alignment="center")
     st.space()
     st.space()
     show_registration= False
