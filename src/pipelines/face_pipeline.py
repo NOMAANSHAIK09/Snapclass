@@ -14,7 +14,7 @@ def load_dlib_models():
     detector = dlib.get_frontal_face_detector()
     
     sp=dlib.shape_predector(
-        face_recognition_models.pose_predictor_five_point_model_location()
+        face_recognition_models.pose_predictor_model_location()
         
     )
     
